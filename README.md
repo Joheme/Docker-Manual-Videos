@@ -1,131 +1,211 @@
 # Docker Manual Vídeos
-** Joel Helguera Menéndez**
+
+**Joel Helguera Menéndez**
 
 ## 01-02-03
-**Introdución**
+
+### Introdución
+
 Docker es un proyecto de código abierto formado por contenedores software para el aprendizaje de creación y administración de bases de datos.
 
 Estos vídeos traen unos links con las soluciones y los comandos para ir siguiendo las clases.
 
 ## 04-05-06
-**Conceptos**
-¿Ques es una base de datos?
- Es un sistema informático, utilizado para organizar y almacenar datos para que puedan ser útiles en un momento superior.
 
-Un sistema de gestión de bases de datos relacionales o RDBMS te las herramientas necesarias para construir una base de datos.
--RDBMS le ayudará a encontrar las columnas que componen cada mesa.
--RDBMS le ayudará a almacenar y organizar sus datos.
--RDBMS tambien protege sus datos estructura, almacena y protege sus datos.
+### ¿Qué es una base de datos?
 
-Que RDBMS elegir según tus necesidades 
-######· Para un proyecto personal o una pequeña empresa:
-Un RDBMS de escritorio 
-Microsoft Access
-FileMaker
-Open Office Base
-######· Para empresas grandes y clientes empresariales 
-Microsoft SQL Server
-Oracle
-Postgre SQL
-######· Si quieres almacenar en la nube para que sea acesible para todo el mundo
-Azure SQL Database 
-Amazobn RDS
+Es un sistema informático, utilizado para organizar y almacenar datos para que puedan ser útiles en un momento posterior.
+
+Un sistema de gestión de bases de datos relacionales o RDBMS te da las herramientas necesarias para construir una base de datos.
+
+### ???
+
+- RDBMS le ayudará a encontrar las columnas que componen cada mesa.
+- RDBMS le ayudará a almacenar y organizar sus datos.
+- RDBMS tambien protege sus datos estructura, almacena y protege sus datos.
+
+### Qué RDBMS elegir según tus necesidades
+
+#### Para un proyecto personal o una pequeña empresa
+
+Un RDBMS de escritorio
+
+- Microsoft Access
+- FileMaker
+- Open Office Base
+
+#### Para empresas grandes y clientes empresariales
+
+- Microsoft SQL Server
+- Oracle
+- PostgreSQL
+
+#### Si quieres almacenar en la nube para que sea accesible para todo el mundo
+
+- Azure SQL Database
+- Amazon RDS
 
 ## 07
-Todos los RDBMS operan de un modelo cliente-servidor
-Tiene 2 partes 
-El servidor que es el que realizar todo el trabajo de gestión de bases de datos relacionales.
-El segundo es el cliente es la interfaz que permite a los usuarios permite controlara su funcionamento.
-Puede ser por línea de comandos o gráfica.
 
-## 08 
+Todos los RDBMS operan de un modelo cliente-servidor
+Tiene 2 partes:
+
+1. El **servidor** que es el que realizar todo el trabajo de gestión de bases de datos relacionales.
+2. El segundo es el **cliente** es la interfaz que permite a los usuarios permite controlara su funcionamento. Puede ser por línea de comandos o gráfica.
+
+## 08
+
+### ???
+
 Los contenedores RDBMS son entornos ligeros de tiempo de ejecución que proporcionan a las aplicaciones los archivos, las variables .. que necesitan.
 
-##  09 
-**Como Instalar docker**
-Ir a docker.com> ir al extremo derecho que pone Get Started y elegir la versión adecuada para ti.
-Una vez instaldo buscar instalador en el propio pc y ejecutarlo valores predeterminados reiniciar despues de instalar comprobar funcionamiento.
+## 09
+
+### Como instalar docker
+
+1. [Ir a Docker](docker.com) ir al extremo derecho que pone Get Started y elegir la versión adecuada para ti.
+2. Una vez instalado buscar instalador en el propio pc y ejecutarlo valores predeterminados reiniciar despues de instalar comprobar funcionamiento.
+
+### Comandos docker
+
 *Todos los comandos en docker comienzan con la palabra docker delante*
-Abre powershell 
-`Docker version` Muestra la version instalada
-`Docker` lista los comandos de docker
+
+Abre powershell:
+
+- `docker version` Muestra la version instalada.
+- `docker` lista los comandos de docker.
 
 ## 10
-Comandos en el archivo Docker_Container.txt
 
-######· Microsoft SQL
-`docker run --name SQLServer2019 -e "ACCEPT_EULA=Y" -E"SA_PASSWORD=Adam123456" -p 1404:1433 -d mcr.microsoft.com/mssql/server:2019 -latest`
+Comandos en el archivo `docker_Container.txt`
 
-######· Postgre SQL
-`docker run --name postgresql -p 5401:5432 -e postgres_PASSWORD=Adam123456 -d postgres:latest`
+### Microsoft SQL
+
+```sh
+docker run --name SQLServer2019 -e "ACCEPT_EULA=Y" -E"SA_PASSWORD=Adam123456" -p 1404:1433 -d mcr.microsoft.com/mssql/server:2019 -latest
+```
+
+### PostgreSQL
+
+```sql
+docker run --name postgresql -p 5401:5432 -e postgres_PASSWORD=Adam123456 -d postgres:latest
+```
 
 ## 11
+
 **Iniciar sesión en un contenedor MicrosoftSQL**
+
 `docker exec -it sqlserver2019 bash`
-*Ahora estas entro del contenedor*
+
+**Ahora estas entro del contenedor**
+
 `/opt/mssql-tools/bin/sqlcmd -U sa -P Adam123456`
-*Comando iniciar sesión*
+
+**Comando iniciar sesión**
+
 Podemos crear una base de datos así:
-`CREATE DATABASE mytestdb`
-`GO`
-`EXIT` para salir
+
+```sql
+CREATE DATABASE mytestdb
+GO
+EXIT -- para salir
+```
+
 **En Postgresql para iniciar sesion**
+
 `docker exec -it  postgresql bash`
+
 `psql -U postgres`
 
 ## 12-13
-Objetivo Crear Un Contenedor
-**SOLUCIÓN**
-Create a new container on a Windows PC:
-docker run --name MySecondSQLServer -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Adam123456" -p 1420:1433 -d mcr.microsoft.com/mssql/server:2019-latest
 
-** View all runing containers**
+### Objetivo
+
+Crear Un Contenedor
+
+### SOLUCIÓN
+
+Create a new container on a Windows PC:
+
+```sh
+docker run --name MySecondSQLServer -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Adam123456" -p 1420:1433 -d mcr.microsoft.com/mssql/server:2019-latest
+```
+
+**View all runing containers**
+
 `docker ps`
 
 **Stop a container**
+
 `docker stop MySecondSQLServer`
 
 **View all containers**
+
 `docker ps -a`
 
-** Start a container**
+**Start a container**
+
 `docker start MySecondSQLServer`
 
-** Remove a container**
+**Remove a container**
+
 `docker rm MySecondSQLServer`
 
 ## 14
-Explora la distintas interfaces gráficas que hay para docker como  Kilematic, Azure, DockStation...
 
+Explora la distintas interfaces gráficas que hay para docker como Kilematic, Azure, DockStation...
 
 ## 15
+
 Vamos a instalar Azure Data Studio:
-Iremos a la página y le daremos a descargar en la opción mas adecuado para tu equipo, una vez instalado vas a tu pc a la carpeta descargas y ejecutar el .exe y seguirás hasta instalarlo.
-Nada mas instalado se ejecutará.
+
+1. Iremos a la página y le daremos a descargar en la opción mas adecuado para tu equipo, una vez instalado vas a tu pc a la carpeta descargas y ejecutar el `.exe` y seguirás hasta instalarlo.
+2. Nada mas instalado se ejecutará.
 
 ## 16-17
-Configuración de Azure x Docker
-Para usar la terminal con el  **Ctrl + '** 
-Presiona el boton azul, empezaremos con MicrosoftSQL , rellena la barra lateral emergente como ditcta en el vídeo.
+
+### Configuración de Azure x Docker
+
+Para usar la terminal con el **`Ctrl + '`**.
+
+Presiona el boton azul, empezaremos con MicrosoftSQL, rellena la barra lateral emergente como ditcta en el vídeo.
+
 Para PostgreSQL es el mismo proceso.
-Se pueden hacer grupos con las opción Add server group.
+
+Se pueden hacer grupos con las opción `Add server group`.
 
 ## 18
+
 Haz click en la tuerca y vete a settings, en la barra de búsqueda busca **tab color** y ponlo en fill para cambiar los colores de los comandos según el tipo.
 Usa **Select From** y ect para consultar en la terminal la información de la tabla que hay intregrada en la base de datos.
 
 ## 19-20
-Objetivo crear base de datos para una empresa llamada KinetEco y administarla con Azure.
-**SOLUCIÓN**
-**Create the server container**
+
+### Objetivo
+
+Crear base de datos para una empresa llamada KinetEco y administarla con Azure.
+
+### SOLUCIÓN
+
+#### Create the server container
+
 Windows PC:
+
+```sh
 docker run --name kineteco -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Adam123456" -p 1411:1433 -d mcr.microsoft.com/mssql/server:2019-latest
+```
 
 MacOS & Linux:
+
+```sh
 docker run --name kineteco -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Adam123456' -p 1411:1433 -d mcr.microsoft.com/mssql/server:2019-latest
+```
 
+#### Connect in Azure Data Studio
 
-**Connect in Azure Data Studio with the following settings**
+Use the following settings:
+
+```
 Connection type: Microsoft SQL Server
 Server name: localhost
 User name: SA
@@ -134,10 +214,13 @@ Remember passowrd: checked
 Server group: SQL Server
 Name: KinetEco
 Advanced - Port: 1411
+```
 
+### Create the database in a new query window
 
-**Create the database in a new query window**
+```sql
 CREATE DATABASE KinetEco;
+```
 
 ## 21
 Los comandos se pueden desglosar en 2 grupos diferentes:
@@ -273,23 +356,37 @@ Añadir a la bases de datos KinetEco a la Employees table, añadir la data table
 `WHERE EmployeeID = 101;`
 
 ## 35
-Para hacer consultas básicas a nuestra bases usaremos lenguaje SQL y utilizaremos comandos básicos como SELECT, FROM Y WHERE.
+
+Para hacer consultas básicas a nuestra bases usaremos lenguaje SQL y utilizaremos comandos básicos como `SELECT`, `FROM` y `WHERE.
 
 ## 36
-**Eliminar todas las filas de la tabla de productos**
-DELETE FROM products.products;
 
-**Agregar todos los datos de productos nuevos**
+### Eliminar todas las filas de la tabla de productos
+
+```sql
+DELETE FROM products.products;
+```
+
+### Agregar todos los datos de productos nuevos
+
+```sql
 INSERT INTO products.products
     (SKU, ProductName, CategoryID, Size, Price)
+```
+
 Usa los comandos que dicta el vídeo y que estan en los bloq de notas de ayuda.
 
 ## 37-38-39-40
-En estos videos filtraremos usando lenguaje SQL  server.
+
+En estos videos filtraremos usando lenguaje SQL.
+
 Aprenderemos desde consultas fáciles a otro nivel más complejo.
+
 Las consultas están en los bloq de notas de ayuda.
+
 Mostraré aquí las mas sencillas:
-__________________________________________________________________________________________________________
+
+```sql
 -- View related data in two tables
 SELECT * FROM products.products
 WHERE SKU = 'ALB008';
@@ -307,8 +404,9 @@ FROM products.products
     JOIN products.categories
         ON products.CategoryID = categories.CategoryID
 WHERE SKU = 'ALB008';
+```
 
-_______________________________________________
+```sql
 -- Retrieving only a specific number of rows
 -- SQL Server uses the TOP keyword
 SELECT TOP 5 *
@@ -321,23 +419,34 @@ SELECT *
 FROM products.products
 ORDER BY Price DESC
 LIMIT 5;
-_______________________
+```
 
 ## 41-42-43-44-45
-Seguimos filtrando usando en las consultas lenguaje SQL, en estos videos se explicará como el having, group by ...
+
+Seguimos filtrando usando en las consultas lenguaje SQL, en estos videos se explicará como el `HAVING`,  `GROUP BY` ...
+
 Recuerda que las consultas usadas en este vídeo las pone en el bloq de notas de ayuda.
 
-· La cláusula GROUP BY es un comando SQL que se usa para agrupar filas que tienen los mismos valores . La cláusula GROUP BY se utiliza en la instrucción SELECT. Opcionalmente se usa junto con funciones agregadas para producir informes resumidos de la base de datos.
-· Así como la cláusula "where" permite seleccionar (o rechazar) registros individuales; la cláusula "having" permite seleccionar (o rechazar) un grupo de registros. ... Se utiliza "having", seguido de la condición de búsqueda, para seleccionar ciertas filas retornadas por la cláusula "group by"
+- La cláusula `GROUP BY` es un comando SQL que se usa para agrupar filas que tienen los mismos valores.
+- La cláusula `GROUP BY` se utiliza en la instrucción `SELECT`. Opcionalmente se usa junto con funciones agregadas para producir informes resumidos de la base de datos.
+- Así como la cláusula `WHERE` permite seleccionar (o rechazar) registros individuales; la cláusula `HAVING` permite seleccionar (o rechazar) un grupo de registros.
+- Se utiliza `HAVING`, seguido de la condición de búsqueda, para seleccionar ciertas filas retornadas por la cláusula `GROUP BY`.
 
 ## 46-47
-Objetivo: Consultar una base de datos.
-Responde preguntas como:
-¿Cuáles son los tamaños en militros?, 
-¿cuáles SKUS de productos diferentes hay disponibles en cada tamaño?, 
-¿cuál es el producto de mayor precio en la línea de productos cosméticos?
-**SOLUCIÓN**
-__________
+
+### Objetivo
+
+Consultar una base de datos.
+
+### Responde preguntas como
+
+- ¿Cuáles son los tamaños en militros?
+- ¿Cuáles SKUs de productos diferentes hay disponibles en cada tamaño?
+- ¿Cuál es el producto de mayor precio en la línea de productos cosméticos?
+
+### SOLUCIÓN
+
+```sql
 -- Q1: convert size from oz to ml
 SELECT SKU, ProductName,
     Size AS "Size (Ounces)",
@@ -362,7 +471,9 @@ WHERE PRICE =
     (SELECT MAX(Price)
      FROM products.products
      WHERE CategoryID = 3)
-    AND CategoryID = 3
-____________________________________________________
+AND CategoryID = 3
+```
+
 ## 48
+
 Felicidades has termiando el Curso de SQL.
